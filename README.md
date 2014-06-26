@@ -1,4 +1,4 @@
-xovio-exchange
+utter-exchange
 ==============
 
-The Extraordinary Compute Exchange.
+The Utter.io Compute Exchange.
