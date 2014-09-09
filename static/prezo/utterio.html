@@ -135,6 +135,10 @@
         <div class="small" id="address"></div>
     </div>
     <div>
+        <img class="photo" src="appliances.png">
+        <p class="big"><span class="yellow">OpenStack</span> + <span class="blue">Bitcoin</span> = Virtual Appliance</p>
+    </div>
+    <div>
         <p class="big">Simple Callback URL Content</p>
         <div class="gist">
             <script src="https://gist.github.com/kordless/7b496134997d233f2664.js"></script>
@@ -145,15 +149,11 @@
         <p class="big">ala BitAuth from BitPay</p>
     </div>
     <div>
-        <img class="photo" src="appliances.png">
-        <p class="big"><span class="yellow">OpenStack</span> + <span class="blue">Bitcoin</span> = Virtual Appliance</p>
+        <p class="big">The appliance <span class="blue">works out-of-the-box</span> with popular OpenStack distros, including <span class="yellow">Nebula, Piston, Redhat, Rackspace, Ubuntu, Metacloud and more</span>.</p>
     </div>
     <div>
         <img class="frame" src="openstackworld.png">
         <p class="big">77% of <span class="yellow">OpenStack</span> Deployments are private cloud.</p>
-    </div>
-    <div>
-        <p class="big">The appliance <span class="blue">works out-of-the-box</span> with popular OpenStack distros, including <span class="yellow">Nebula, Piston, Redhat, Rackspace, Ubuntu, Metacloud and more</span>.</p>
     </div>
     <div>
         <img class="photo" src="appengine.png">
@@ -163,7 +163,9 @@
         <iframe src="https://www.stackmonkey.com/" width="800" height="700"></iframe>
     </div>
     <div>
-        <p class="big"><a href="http://google.com/">http://google.com/</a></p>
+        <p id="inception" class="medium">Inception</p>
+        <p id="demolink" class="big"></p>
+        <p id="token" class="big"></p>
     </div>
     <div>
         <p class="medium rackspace">Funding Structure</p>
@@ -236,15 +238,17 @@
       return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
     }
     utterio.start({'effect': "layout"});
+
+    var token = "";
     $('#demo').click(function() {
         post_data = {
             "requires_ipv4": 0, 
-            "callback_url": "https://gist.githubusercontent.com/kordless/7c59f33c0659d06948ce/raw/simpleboot.json", 
+            "callback_url": "https://gist.githubusercontent.com/kordless/88046b0f91fb6e3e1b21/raw/prezo.json", 
             "requires_ipv6": 0, 
             "providers": [
                 {
-                    "name": "All Providers", 
-                    "id": 1
+                    "name": "Nebula", 
+                    "id": 5728832061440000
                 }
             ], 
             "flavor_id": "5190466500820992"
@@ -274,21 +278,34 @@
             var qrcode_string = "bitcoin:"+data.result.bid.address+"?amount="+(parseInt(data.result.bid.ask)/1000000);
             $('#demo').qrcode({text: qrcode_string});
             $('#address').html(data.result.bid.address);
+            token = data.result.bid.token;
             console.log(data.result.bid.address);
         }).fail(function(data) {
             // oh noes, grab the response
             response = jQuery.parseJSON(data.responseText);
+            console.log(response);
             // build the QR code for the instance address
             $('#terra').html('');
             if (response.result.bid == undefined) {
                 $('#address').html(response.result.message);
             } else {
                 var qrcode_string = "bitcoin:"+response.result.bid.address+"?amount="+(parseInt(response.result.bid.ask)/1000000);
+                console.log(qrcode_string);
                 $('#demo').qrcode({text: qrcode_string});
                 $('#address').html(response.result.bid.address);
+                token = response.result.bid.token;
             }
             console.log(response.result.message);
         });
+    });
+
+    $('#inception').click(function() {
+        console.log("token is "+token);
+        $('#token').html('<a target="_blank" href="https://www.stackmonkey.com/bids/'+token+'/">Bids</a> and <a target="_blank" href="https://www.stackmonkey.com/instances/'+token+'/">Instances</a>');
+        $.getJSON("https://www.stackmonkey.com/api/v1/bids/"+token+"/")
+            .done(function(data) {
+                $('#demolink').html('<a target="_blank" href="http://'+data.result.instance.ipv4_address+'/utterio.html">'+data.result.instance.ipv4_address+'</a>');
+            });
     });
   });
 </script>
