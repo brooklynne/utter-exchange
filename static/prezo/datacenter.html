@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<style>
+
+body {
+  font: 10px sans-serif;
+  overflow: hidden;
+}
+
+</style>
+</head>
+<body>
+<script src="d3.v3.min.js"></script>
+<script>
+var margin = {top: 20, right: 20, bottom: 30, left: 140},
+    width = 800 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var center;
+
+// draw the procs
+for (var i = 0; i < 3; i++) {
+	for (var j = 0; j < 3; j++) {
+		center = svg.append("svg:image")
+    		.attr("xlink:href", "datacenter.jpg")
+      		.attr("width", 160)
+      		.attr("height", 130)
+      		.attr("x", i*180)
+      		.attr("y", j*130);
+    }
+}
+
+</script>
+</body>
+</html>

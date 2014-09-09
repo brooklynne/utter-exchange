@@ -1,0 +1,145 @@
+/**
+ * utterio.css
+ *
+ * Copyright 2013 GeekCEO, Inc. (@kordless)
+ *
+ * Released under the MIT and GPL Licenses.
+ *
+ * ------------------------------------------------
+ *  author:  Kord Campbell
+ *  version: 0.0.1
+ *  url:     http://github.com/utterio/
+ */
+
+/* icons, buttons, bar, etc. */
+@import url('util.css');
+
+/* back to basics */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+body { line-height: 1; }
+ol, ul { list-style: disk; }
+table { border-collapse: collapse; border-spacing: 0; }
+b, strong { font-weight: bold }
+i, em { font-style: italic }
+a { color: inherit; text-decoration: none; padding: 0 0.1em; background: rgba(255,255,255,0.5); text-shadow: -1px -1px 2px rgba(100,100,100,0.9); border-radius: 0.2em; -webkit-transition: 0.5s; -moz-transition: 0.5s; -ms-transition: 0.5s; -o-transition: 0.5s; transition: 0.5s; } 
+a:hover, a:focus { background: rgba(255,255,255,1); text-shadow: -1px -1px 2px rgba(100,100,100,0.5); }
+
+/* body setup, including font and background color/gradient */
+body {
+    display: none;
+    font-family: 'Ranchers', cursive;
+    min-height: 740px;
+    
+    /* prezo backgrounds & default text colors */
+    /* white theme 
+    */ 
+    background: white;
+    background: -webkit-gradient(radial, 90% 90%, 0, 90% 90%, 500, from(rgb(255, 255, 255)), to(rgb(222, 222, 222)));
+    background: -webkit-radial-gradient(rgb(255, 255, 255), rgb(222, 222, 222));
+    background:    -moz-radial-gradient(rgb(255, 255, 255), rgb(222, 222, 222));
+    background:     -ms-radial-gradient(rgb(255, 255, 255), rgb(222, 222, 222));
+    background:      -o-radial-gradient(rgb(255, 255, 255), rgb(222, 222, 222));
+    background:         radial-gradient(rgb(255, 255, 255), rgb(222, 222, 222));
+    color: #444;
+
+    /* black theme 
+    background: #444;
+    background: -webkit-gradient(radial, 90% 90%, 0, 90% 90%, 500, from(rgb(55, 55, 55)), to(rgb(0, 0, 0)));
+    background: -webkit-radial-gradient(rgb(55, 55, 55), rgb(0, 0, 0));
+    background:    -moz-radial-gradient(rgb(55, 55, 55), rgb(0, 0, 0));
+    background:     -ms-radial-gradient(rgb(55, 55, 55), rgb(0, 0, 0));
+    background:      -o-radial-gradient(rgb(55, 55, 55), rgb(0, 0, 0));
+    background:         radial-gradient(rgb(55, 55, 55), rgb(0, 0, 0));
+    color: #CCC; 
+    */
+}
+
+/* handy dandy colors */
+.yellow { color: #f1c40f; }
+.orange { color: #f39c12; }
+.green { color: #2ECC71; }
+.grass { color: #27AE60; }
+.blue { color: #3498DB; }
+.bluetoo { color: #4183C4; }
+.water { color: #2980B9; }
+.purple { color: #9859B6; }
+.shop { color: #8E44AD; }
+.red { color: #E74C3C; }
+.blood { color: #C0392B; }
+.carrot { color: #e67e22; }
+.pumpkin { color: #d35400; }
+.turquoise { color: #1abc9c; }
+.seafoam { color: #16a085; }
+.asphalt { color: #34495E; }
+.midnight { color: #2C3E50; }
+.concrete { color: #95A5A6; }
+.asbestos { color: #7F8C8D; }
+.cloud { color: #ECF0F1; }
+.silver { color: #BDC3C7; }
+.rackspace { color: #c40123; }
+
+/* sizes for text */
+.small, .big, .bigger, .biggy, .medium {
+    text-align: center;
+}
+.small {
+    font-size: 30px;
+}
+.big {
+    font-size: 50px;
+}
+.bigger {
+    font-size: 200px;
+}
+.biggy {
+    font-size: 150px;
+}
+.big {
+    margin-bottom: 10px;
+}
+.medium {
+    font-size: 90px;
+}
+iframe.demo {
+    margin-left: -100px;
+}
+/* handy bits for gists and images */
+.gist {
+    width: 800px;
+    font-size: 14px;
+    text-align: left;
+}
+div a {
+    background: none !important;
+}
+img.background {
+    width: 1600px;
+    margin-left: -400px;
+}
+
+img.frame {
+    width: 800px;
+    background: white; 
+    padding: 8px; 
+    border: 1px solid #CCC; 
+}
+
+img.photo {
+    width: 800px;
+}
+
+img.ladies {
+    width: 600px;
+    margin-left: 90px;
+}
+
+img.tape {
+    margin-left: 140px;
+    width: 525;
+} 
+
+ul {
+    width: 700px;
+    margin-left: 100px;
+}
+/* end */

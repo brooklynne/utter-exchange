@@ -1,0 +1,182 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>three.js webgl - particles - billboards</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link href='http://fonts.googleapis.com/css?family=Ranchers' rel='stylesheet' type='text/css'>
+
+		<style>
+
+			body {
+				background-color: #000000;
+				margin: 0px;
+				overflow: hidden;
+				font-family:Monospace;
+				text-align:center;
+				font-weight: bold;
+				text-align:center;
+				font-family: 'Open Sans', sans-serif;
+			}
+
+			.box {
+				background: rgba(255, 255, 255, 0.6);
+				padding: 20px;
+				border-radius: 3px;
+				box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+				margin: 0 auto;
+        max-width: 600px;
+        color: #CCC; 
+			}
+
+			.container {
+				position: absolute;
+				padding-top: 10%;
+				top: 0px;
+				width: 100%;
+				height: 100%;
+      }
+
+			.space {
+				display: block;
+				width: 100%;
+				height: 100%;
+			}
+
+			.social {
+				margin: 14px;
+			}
+			.blurb {
+				font-size: 18px;
+				color: #222;
+				font-weight: normal;
+				margin-bottom: 14px;
+			}
+			
+			.big {
+				font-size: 75px;
+				margin: 20px;
+				color: #222;
+				font-family: 'Ranchers', cursive;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div id="space"></div>
+		<div class="container">
+			<div class="box">
+				<p class="big">Utter.io</p>
+				<p class="blurb">A globally federated cloud based on trust and transparency.</p>
+					<iframe src="http://ghbtns.com/github-btn.html?user=stackmonkey&repo=utter-exchange&type=watch&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="150px" height="30px"></iframe>
+					<a href="https://twitter.com/utterio" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @utterio</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+				</div>
+			</div>
+		</div>
+
+		<script src="/static/js/three.min.js"></script>
+		<script src="/static/js/Detector.js"></script>
+		<script>
+
+			if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+
+			var container;
+			var camera, scene, renderer, particles, geometry, material, i, h, color, sprite, size;
+			var mouseX = 0, mouseY = 0;
+
+			var windowHalfX = window.innerWidth / 2;
+			var windowHalfY = window.innerHeight / 2;
+
+			init();
+			animate();
+
+			function init() {
+
+				camera = new THREE.PerspectiveCamera( 55, window.innerWidth / window.innerHeight, 2, 2000 );
+				camera.position.z = 1000;
+
+				scene = new THREE.Scene();
+				scene.fog = new THREE.FogExp2( 0x000000, 0.001 );
+
+				geometry = new THREE.Geometry();
+
+				sprite = THREE.ImageUtils.loadTexture( "/static/img/openstack.png" );
+
+				for ( i = 0; i < 10000; i ++ ) {
+
+					var vertex = new THREE.Vector3();
+					vertex.x = 2000 * Math.random() - 1000;
+					vertex.y = 2000 * Math.random() - 1000;
+					vertex.z = 2000 * Math.random() + 400;
+
+					geometry.vertices.push( vertex );
+
+				}
+
+
+
+				material = new THREE.PointCloudMaterial( { size: 35, sizeAttenuation: true, map: sprite, transparent: true } );
+				material.color.setHSL( 1.0, 0.3, 0.7 );
+
+				particles = new THREE.PointCloud( geometry, material );
+				particles.sortParticles = true;
+				scene.add( particles );
+
+				//
+
+				renderer = new THREE.WebGLRenderer( { clearAlpha: 1 } );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+				container = document.getElementById('space');
+				container.appendChild( renderer.domElement );
+
+				//
+
+				window.addEventListener( 'resize', onWindowResize, false );
+
+			}
+
+			function onWindowResize() {
+
+				windowHalfX = window.innerWidth / 2;
+				windowHalfY = window.innerHeight / 2;
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+			}
+
+			//
+
+			function animate() {
+
+				requestAnimationFrame( animate );
+
+				render();
+			}
+
+			function render() {
+
+				var time = Date.now() * 0.000005;
+
+				camera.position.x += 0.005;
+				camera.position.y += 0.005;
+				camera.position.z += 0.04;
+
+				camera.lookAt( scene.position );
+
+				h = ( 360 * ( 1 + time ) % 360 ) / 360;
+				material.color.setHSL( h, 0.5, 0.5 );
+
+				renderer.render( scene, camera );
+
+			}
+
+		</script>
+	</body>
+</html>
+
